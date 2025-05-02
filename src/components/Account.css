@@ -1,0 +1,57 @@
+/* --- 追加 --- */
+html, body, #root {
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* 全体を中央寄せ */
+  .account-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+    /* inline-block は絶対に消す */
+  }
+  
+  /* カード */
+  .account-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .account-card input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .account-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .account-card button:hover {
+    background-color: #45a049;
+  }
+  
+  .account-card .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
