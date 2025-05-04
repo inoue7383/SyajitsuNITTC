@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { auth, db } from '../firebase';
-import { updateProfile, updateEmail, updatePassword } from 'firebase/auth'; // updateEmail と updatePassword をインポート
+import { updateProfile, updateEmail, updatePassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import './Account.css';
+
 export default function Account() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState(currentUser?.displayName || '');
   const [email, setEmail] = useState(currentUser?.email || '');
   const [password, setPassword] = useState('');
@@ -18,18 +22,15 @@ export default function Account() {
     setSuccess('');
 
     try {
-      // ユーザーネームの更新
       if (username !== currentUser.displayName) {
         await updateProfile(currentUser, { displayName: username });
         await setDoc(doc(db, 'accounts', currentUser.uid), { username }, { merge: true });
       }
 
-      // メールアドレスの更新
       if (email !== currentUser.email) {
         await updateEmail(currentUser, email);
       }
 
-      // パスワードの更新
       if (password) {
         await updatePassword(currentUser, password);
       }
@@ -43,13 +44,31 @@ export default function Account() {
   return (
     <div className="account-container">
       <div className="account-card">
+        
+        {/* 戻るボタン */}
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => navigate(-1)}
+          style={{
+            textAlign: 'start',
+            marginBottom: '1rem',
+            background: 'none',
+            border: 'none',
+            color: '#1e88e5',
+            cursor: 'pointer',
+            fontSize: '14px',
+            height: '20px'
+          }}
+        >
+          ← 戻る
+        </button>
         <h2>アカウント情報の変更</h2>
 
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
 
         <form onSubmit={handleUpdate}>
-          {/* ユーザーネーム */}
           <div className="form-group">
             <label htmlFor="username">ユーザーネーム:</label>
             <input
@@ -62,7 +81,6 @@ export default function Account() {
             />
           </div>
 
-          {/* メールアドレス */}
           <div className="form-group">
             <label htmlFor="email">メールアドレス:</label>
             <input
@@ -75,7 +93,6 @@ export default function Account() {
             />
           </div>
 
-          {/* パスワード */}
           <div className="form-group">
             <label htmlFor="password">パスワード:</label>
             <input

@@ -136,7 +136,7 @@ export default function Upload() {
           style={{
             padding: '0.75rem 1.5rem',
             borderRadius: '12px',
-            background: 'linear-gradient(135deg,rgb(68, 38, 218),rgb(0, 193, 35))',
+            background: 'linear-gradient(135deg, #42a5f5, #1e88e5)',
             color: '#fff',
             border: 'none',
             cursor: 'pointer',
