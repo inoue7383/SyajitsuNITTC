@@ -14,7 +14,7 @@ import {
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
-import { Settings, Trash2, Upload as UploadIcon, Home } from 'lucide-react';
+import { Settings, Trash2, Upload as UploadIcon, Home, FilePen, FileUp } from 'lucide-react';
 
 export default function Upload() {
   const { currentUser } = useAuth();
@@ -128,7 +128,7 @@ export default function Upload() {
         display: 'flex',
         gap: '1rem',
         alignItems: 'center',
-        marginBottom: '1.5rem',
+        marginBottom: '0.5rem',
         flexWrap: 'wrap'
       }}>
         <button
@@ -159,15 +159,20 @@ export default function Upload() {
           <UploadIcon size={18} />
            アップロード
         </button>
-
-        <input
-          type="file"
-          multiple
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
       </div>
+
+      {/* ファイル形式の注意書き */}
+      <p style={{ color: '#555', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
+        対応ファイル形式: Excel（.xlsx, .xls）、CSV、TSV
+      </p>
+
+      <input
+        type="file"
+        multiple
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+      />
 
       {selectedFiles.length > 0 && (
         <div style={{ marginTop: '1rem' }}>
@@ -190,7 +195,7 @@ export default function Upload() {
               <span>{file.name}</span>
               <div className="settings" style={{ display: 'flex', gap: '0.5rem', visibility: 'hidden' }}>
                 <button onClick={() => handleUploadSelectedFile(file)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                  <Settings size={16} />
+                  <FileUp size={16} />
                 </button>
               </div>
             </div>
@@ -213,7 +218,7 @@ export default function Upload() {
         }} onMouseEnter={e => e.currentTarget.querySelector('.settings').style.visibility = 'visible'} onMouseLeave={e => e.currentTarget.querySelector('.settings').style.visibility = 'hidden'}>
           <span>{fileName}</span>
           <div className="settings" style={{ display: 'flex', gap: '0.5rem', visibility: 'hidden' }}>
-            <button onClick={() => handleReplace(fileName)} style={{ background:'none', border:'none', cursor:'pointer' }}><Settings size={16} /></button>
+            <button onClick={() => handleReplace(fileName)} style={{ background:'none', border:'none', cursor:'pointer' }}><FilePen size={16} /></button>
             <button onClick={() => handleDelete(fileName)} style={{ background:'none', border:'none', cursor:'pointer' }}><Trash2 size={16} /></button>
           </div>
         </div>
