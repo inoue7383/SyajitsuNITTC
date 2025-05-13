@@ -262,7 +262,7 @@ export default function Main() {
       {filtered.length === 0 && <p>データが存在しません。</p>}
 
       {filtered.map(({ fileName, records }) => {
-        const initialCount = isMobile ? 1 : 4;
+        const initialCount = isMobile ? 1 : 3;
         const showAll = !!showAllByFile[fileName];
         const displayRecords = showAll ? records : records.slice(0, initialCount);
         return (
@@ -275,16 +275,17 @@ export default function Main() {
                 <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '1rem' }}>
                   <button
                     onClick={() => toggleShow(fileName)}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.15)';
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      margin: 0,
+                      cursor: 'pointer',
                     }}
                   >
-                    {showAll ? <CircleChevronUp size={20} color='#000000' /> : <Ellipsis size={20} />}
+                    {showAll
+                      ? <CircleChevronUp size={20} color='#000000' />
+                      : <Ellipsis size={20} />} {/* 折りたたみ時にも見えるサイズ */}
                   </button>
                   {displayRecords.map((rec, idx) => (
                     <div
@@ -311,16 +312,17 @@ export default function Main() {
                   <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                     <button
                       onClick={() => toggleShow(fileName)}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.boxShadow = '0 2px 6px rgba(0,0,0,0.15)';
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        margin: 0,
+                        cursor: 'pointer',
                       }}
                     >
-                      {showAll ? <CircleChevronUp size={20} color='#000000' /> : <Ellipsis size={20} />}
+                      {showAll
+                        ? <CircleChevronUp size={20} color='#000000' />
+                        : null}
                     </button>
                   </div>
                 )}
