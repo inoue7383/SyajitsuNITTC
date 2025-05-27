@@ -7,6 +7,7 @@ import Upload from './components/Upload';
 import Main   from './components/Main';
 import Account   from './components/Account';
 import Auth from './components/Auth';
+import Log from './components/LogsPage';
 
 function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/login"  element={<Login />} />
           <Route path="/account"  element={<Account />} />
           <Route path="/auth"   element={<Auth  />} />
+          <Route path="/log"   element={<Log  />} />
           <Route path="/upload" element={
           <PrivateRoute><Upload /></PrivateRoute>
           } />
